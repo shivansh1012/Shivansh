@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main() {
-    int h,d,b;
+    int h,d,b; 
     float VolumeOfTromboloid;
 
     printf("Enter value of h : ");
