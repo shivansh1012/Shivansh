@@ -1,5 +1,6 @@
 //Write the program to print "Hello World !"
 #include<stdio.h>
-void main(){
-printf("Shivansh Pandey");
+int main(){
+  printf("Shivansh Pandey\n");
+  return 0;
 }
