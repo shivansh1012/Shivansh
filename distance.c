@@ -15,7 +15,7 @@ void input() {
     scanf("%f",&y22);
 }
 
-float distance() { 
+float distance() {
     return sqrt((x22-x11)*(x22-x11)+(y22-y11)*(y22-y11));
     }
 
