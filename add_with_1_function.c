@@ -6,16 +6,14 @@ int sumOfNumbers(int a1, int a2) {
 }
 
 int main() {
-    int a1, a2, sum;
+    int a1, a2;
 
     printf("Enter Number: ");
     scanf("%d", &a1);
     printf("Enter Number: ");
     scanf("%d", &a2);
 
-    sum = sumOfNumbers(a1, a2);
-
-    printf("Sum of %d and %d is %d.", a1, a2, sum);
+    printf("Sum of %d and %d is %d.", a1, a2, sumOfNumbers(a1, a2));
 
     return 0;
 }
