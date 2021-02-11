@@ -5,11 +5,11 @@ struct fraction
 };
 typedef struct fraction Fraction;
 
-Fraction addition(Fraction f1, Fraction f2)
+Fraction addition(Fraction num1, Fraction num2)
 {
 	Fraction res;
-	res.den = f1.den * f2.den;
-	res.num = (f1.num * f2.den) + (f2.num * f1.den);
+	res.num = num1.num * num2.den + num2.num * num1.den;
+	res.den = num1.den * num2.den;
 
 	return res;
 }
@@ -37,15 +37,7 @@ int gcd(int num, int den)
 	return div;
 }
 
-Fraction reduce_lowest(Fraction f, int divisor)
-{
-    f.num /= divisor;
-	f.den /= divisor;
-
-    return f;
-}
-
-void output(Fraction f, int divisor)
+void output(Fraction f)
 {
 	printf("The answer is: %d/%d", f.num, f.den);
 }
@@ -69,8 +61,9 @@ int main()
     }
     result = sum(a, len);
     divisor = gcd(result.num, result.den);
-	result = reduce_lowest(result, divisor);
-	output(result, divisor);
+	result.num/=divisor;
+	result.den/=divisor;
+	output(result);
     return 0;
 
 }
