@@ -5,6 +5,12 @@ struct fraction {
 };
 typedef struct fraction Fraction;
 
+int getLength() {
+	int len;
+	printf("Enter Total numbers\n");
+    scanf("%d", &len);
+	return len;
+}
 Fraction getFraction() {
     Fraction newFraction;
     printf("Enter numerator: ");
@@ -62,22 +68,16 @@ void output(int len, Fraction a[len], Fraction f) {
 
 
 int main() {
-    int len, divisor;
+    int len=getLength(), divisor;
 	Fraction result;
-
-    printf("Enter Total numbers\n");
-    scanf("%d", &len);
     Fraction a[len];
 
 	getArray(len, a);
-
     result = computeSum(a, len);
-
     divisor = computeGCD(result.num, result.den);
-
 	result = computeAnswer(result, divisor);
 
 	output(len, a, result);
+	
     return 0;
-
 }
