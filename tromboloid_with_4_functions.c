@@ -1,24 +1,29 @@
-//WAP to find the volume of a tromboloid using 4 functions.
 #include <stdio.h>
-double h,b,d;
-void input() {
-    printf("Enter value of h of Tromboloid:");
-    scanf("%lf",&h);
-    printf("Enter value of d of Tromboloid:");
-    scanf("%lf",&d);
-    printf("Enter value of b of Tromboloid:");
-    scanf("%lf",&b);
+
+double getInput(char s[20]) {
+    double tempVal;
+    printf("Enter %s of tromboliod : ", s);
+    scanf("%lf", &tempVal);
+    return tempVal;
 }
 
-double VolumeOfTromboloid() { 
-    if(b==0) return 0;
-    else return ((1/(double)3)*((h*d*b)+(d/b))); 
-    }
+double VolumeOfTromboloid(int h, int b, int d) {
+    if (b == 0)
+        return 0;
+    else
+        return ((1 / (double)3) * ((h * d * b) + (d / b)));
+}
 
-void output(double Volume) { printf("Volume of Tromboloid %lf\n",Volume); }
+void output(double Volume) {
+    printf("Volume of Tromboloid %lf\n", Volume);
+}
 
 int main() {
-    input();
-    output(VolumeOfTromboloid());
+    double h, b, d, Volume;
+    h=getInput("height");
+    b=getInput("breadth");
+    d=getInput("depth");
+    Volume=VolumeOfTromboloid(h,b,d);
+    output(Volume);
     return 0;
 }
