@@ -51,8 +51,13 @@ Fraction computeAnswer(Fraction total, int divisor) {
 	return total;
 }
 
-void output(Fraction f) {
-	printf("The answer is: %d/%d", f.num, f.den);
+void output(int len, Fraction a[len], Fraction f) {
+	int i;
+	printf("The sum of ");
+	for(i=0;i<len-1;i++)
+		printf(" %d\\%d +",a[i].num, a[i].den); 
+
+	printf("%d\\%d is: %d/%d", a[i].num, a[i].den, f.num, f.den);
 }
 
 
@@ -72,7 +77,7 @@ int main() {
 
 	result = computeAnswer(result, divisor);
 
-	output(result);
+	output(len, a, result);
     return 0;
 
 }
