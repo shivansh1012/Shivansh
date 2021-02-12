@@ -1,33 +1,41 @@
 #include <stdio.h>
-struct fraction
-{
+
+struct fraction {
     int num, den;
 };
 typedef struct fraction Fraction;
 
-Fraction addition(Fraction num1, Fraction num2)
-{
-	Fraction res;
-	res.num = num1.num * num2.den + num2.num * num1.den;
-	res.den = num1.den * num2.den;
+Fraction getFraction() {
+    Fraction newFraction;
+    printf("Enter numerator: ");
+    scanf("%d", &newFraction.num);
+    printf("Enter denominator: ");
+    scanf("%d", &newFraction.den);
 
-	return res;
+    return newFraction;
 }
 
-Fraction sum(Fraction a[], int size)
-{
+void getArray(int len, Fraction arr[len]) {
+	printf("Enter the array elements\n");
+	for (int i=0;i<len;i++) {
+		arr[i]=getFraction();
+	}
+}
+
+Fraction computeSum(Fraction a[], int size) {
     Fraction total;
 	total.num = 0;
 	total.den = 1;
 
-	for (int i = 0; i < size; i++)
-		total = addition(total, a[i]);
-
+	for (int i = 0; i < size; i++) {
+		total.num = total.num * a[i].den + a[i].num * total.den;
+		total.den = total.den * a[i].den;
+	}
+	
 	return total;
 }
 
-int gcd(int num, int den)
-{
+int computeGCD(int num, int den) {
 	int div;
 	for (int i = 1; i <= num && i <= den; i++)
 	{
@@ -37,14 +45,18 @@ int gcd(int num, int den)
 	return div;
 }
 
-void output(Fraction f)
-{
+Fraction computeAnswer(Fraction total, int divisor) {
+	total.num= total.num/divisor;
+	total.den= total.den/divisor;
+	return total;
+}
+
+void output(Fraction f) {
 	printf("The answer is: %d/%d", f.num, f.den);
 }
 
 
-int main()
-{
+int main() {
     int len, divisor;
 	Fraction result;
 
@@ -52,17 +64,14 @@ int main()
     scanf("%d", &len);
     Fraction a[len];
 
-    for (int i = 0; i < len; i++)
-    {
-        printf("Enter the numerator ");
-        scanf("%d", &a[i].num);
-        printf("Enter the denominator: ");
-        scanf("%d", &a[i].den);
-    }
-    result = sum(a, len);
-    divisor = gcd(result.num, result.den);
-	result.num/=divisor;
-	result.den/=divisor;
+	getArray(len, a);
+
+    result = computeSum(a, len);
+
+    divisor = computeGCD(result.num, result.den);
+
+	result = computeAnswer(result, divisor);
+
 	output(result);
     return 0;
 
