@@ -8,28 +8,42 @@ typedef struct fraction Fraction;
 
 Fraction getFraction() {
     Fraction tempFract;
-    printf("Enter the numerator ");
+    printf("Enter the numerator : ");
     scanf("%d", &tempFract.num);
-    printf("Enter the denominator: ");
+    printf("Enter the denominator : ");
     scanf("%d", &tempFract.den);
     return tempFract;
 }
 
 int computeGCD(int num, int den) {
 	int div;
-	for (int i = 1; i <= num && i <= den; i++)
-	{
+	for (int i = 1; i <= num && i <= den; i++) {
 		if (num % i == 0 && den % i == 0)
 			div = i;
 	}
 	return div;
 }
 
+int computeGCDWay2(int num, int den) {
+    int div;
+	for (int i = 2; i <= num && i <= den; i++) {
+		if (num % i == 0 && den % i == 0)
+			div = i;
+	}
+	return div;
+}
+
+int computeGCDWayEuclide(int num, int den) {
+    if (num == 0)
+        return den;
+    return computeGCDWayEuclide(den%num, num);
+}
+
 Fraction computeSum(Fraction frac1, Fraction frac2) {
     Fraction sum;
     sum.den = frac1.den * frac2.den;
     sum.num = frac1.num * frac2.den + frac1.den * frac2.num;
-    int divisor=computeGCD(sum.num,sum.den);
+    int divisor=computeGCDWayEuclide(sum.num,sum.den);
     sum.num= sum.num/divisor;
 	sum.den= sum.den/divisor;
     return sum;
