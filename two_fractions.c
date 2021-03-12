@@ -25,7 +25,7 @@ int computeGCD(int num, int den) {
 }
 
 int computeGCDWay2(int num, int den) {
-    int div;
+    int div=1;
 	for (int i = 2; i <= num && i <= den; i++) {
 		if (num % i == 0 && den % i == 0)
 			div = i;
