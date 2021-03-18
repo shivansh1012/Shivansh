@@ -28,19 +28,6 @@ void getArray(int len, Fraction arr[len]) {
 	}
 }
 
-Fraction computeSum(Fraction a[], int size) {
-    Fraction total;
-	total.num = 0;
-	total.den = 1;
-
-	for (int i = 0; i < size; i++) {
-		total.num = total.num * a[i].den + a[i].num * total.den;
-		total.den = total.den * a[i].den;
-	}
-	
-	return total;
-}
-
 int computeGCD(int num, int den) {
 	int div;
 	for (int i = 1; i <= num && i <= den; i++)
@@ -57,27 +44,42 @@ Fraction computeAnswer(Fraction total, int divisor) {
 	return total;
 }
 
-void output(int len, Fraction a[len], Fraction f) {
+Fraction computeSum(Fraction a[], int size) {
+    Fraction total;
+	total.num = 0;
+	total.den = 1;
+
+	for (int i = 0; i < size; i++) {
+		total.num = total.num * a[i].den + a[i].num * total.den;
+		total.den = total.den * a[i].den;
+	}
+
+	int divisor = computeGCD(total.num, total.den);
+	total=computeAnswer(total, divisor);
+
+	return total;
+}
+
+
+
+void output(int len, Fraction allFractions[len], Fraction f) {
 	int i;
 	printf("The sum of ");
 	for(i=0;i<len-1;i++)
-		printf(" %d\\%d +",a[i].num, a[i].den); 
+		printf(" %d/%d +",allFractions[i].num, allFractions[i].den); 
 
-	printf("%d\\%d is: %d/%d", a[i].num, a[i].den, f.num, f.den);
+	printf(" %d/%d is: %d/%d", allFractions[i].num, allFractions[i].den, f.num, f.den);
 }
 
 
 int main() {
-    int len=getLength(), divisor;
-	Fraction result;
-    Fraction a[len];
+    int len=getLength();
+	
+    Fraction allFractions[len];
+	getArray(len, allFractions);
 
-	getArray(len, a);
-    result = computeSum(a, len);
-    divisor = computeGCD(result.num, result.den);
-	result = computeAnswer(result, divisor);
-
-	output(len, a, result);
+    Fraction result = computeSum(allFractions, len);
+	output(len, allFractions, result);
 	
     return 0;
 }
