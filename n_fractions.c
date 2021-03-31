@@ -38,6 +38,22 @@ int computeGCD(int num, int den) {
 	return div;
 }
 
+int computeGCDWay2(int num, int den) {
+    int div=1;
+	for (int i = 2; i <= num && i <= den; i++) {
+		if (num % i == 0 && den % i == 0)
+			div = i;
+	}
+	return div;
+}
+
+int computeGCDWayEuclide(int num, int den) {
+    if (num == 0)
+        return den;
+    return computeGCDWayEuclide(den%num, num);
+}
+
+
 Fraction computeAnswer(Fraction total, int divisor) {
 	total.num= total.num/divisor;
 	total.den= total.den/divisor;
