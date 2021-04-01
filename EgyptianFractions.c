@@ -29,8 +29,8 @@ void input_n_Fractions(int TestCases, EgyptianFraction eFraction[TestCases]){
 }
 
 int computeGCD(int num, int den) {
-	int div;
-	for (int i = 1; i <= num && i <= den; i++)
+	int div=1;
+	for (int i = 2; i <= num && i <= den; i++)
 	{
 		if (num % i == 0 && den % i == 0)
 			div = i;
@@ -45,10 +45,10 @@ Fraction computeAnswer(Fraction total, int divisor) {
 }
 
 void compute_one_Fraction(EgyptianFraction *eFraction) {
-    eFraction->sum.num=0;
-    eFraction->sum.den=1;
+    eFraction->sum.num=eFraction->fraction[0].num;
+    eFraction->sum.den=eFraction->fraction[0].den;
 
-    for (int i = 0; i < eFraction->TotalFractions; i++) {
+    for (int i = 1; i < eFraction->TotalFractions; i++) {
 		eFraction->sum.num = eFraction->sum.num * eFraction->fraction[i].den + eFraction->fraction[i].num * eFraction->sum.den;
 		eFraction->sum.den = eFraction->sum.den * eFraction->fraction[i].den;
 	}
